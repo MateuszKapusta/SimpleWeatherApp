@@ -6,6 +6,7 @@ using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using SimpleWeatherApp.Core.ViewModels.Main;
 using SimpleWeatherApp.Core.ViewModels.Settings;
+using SimpleWeatherApp.Core.ViewModels.Weather;
 
 namespace SimpleWeatherApp.Core.ViewModels.Menu
 {
@@ -15,6 +16,7 @@ namespace SimpleWeatherApp.Core.ViewModels.Menu
 
         public IMvxAsyncCommand ShowHomeCommand { get; private set; }
         public IMvxAsyncCommand ShowSettingsCommand { get; private set; }
+        public IMvxAsyncCommand ShowWeatherCommand { get; private set; }
 
         public MenuViewModel(IMvxNavigationService navigationService)
         {
@@ -22,6 +24,7 @@ namespace SimpleWeatherApp.Core.ViewModels.Menu
 
             ShowHomeCommand = new MvxAsyncCommand(NavigateToHomeAsync);
             ShowSettingsCommand = new MvxAsyncCommand(NavigateToSettingsAsync);
+            ShowWeatherCommand = new MvxAsyncCommand(NavigateToWeathersAsync);
         }
 
         private Task NavigateToHomeAsync()
@@ -32,6 +35,11 @@ namespace SimpleWeatherApp.Core.ViewModels.Menu
         private Task NavigateToSettingsAsync()
         {
             return _navigationService.Navigate<SettingsViewModel>();
+        }
+
+        private Task NavigateToWeathersAsync()
+        {
+            return _navigationService.Navigate<WeatherViewModel>();
         }
     }
 }

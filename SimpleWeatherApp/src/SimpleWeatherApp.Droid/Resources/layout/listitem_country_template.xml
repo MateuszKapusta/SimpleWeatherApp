@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:local="http://schemas.android.com/apk/res/com.simpleweatherapp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/abc_button_inset_vertical_material">
+        
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"     
+        local:MvxBind="Text Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            local:MvxBind="Text Country"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            local:MvxBind="Text Lat"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            local:MvxBind="Text Lot"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </RelativeLayout >
+</LinearLayout>

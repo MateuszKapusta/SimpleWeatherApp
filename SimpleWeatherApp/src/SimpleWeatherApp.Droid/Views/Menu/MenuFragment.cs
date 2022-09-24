@@ -39,6 +39,9 @@ namespace SimpleWeatherApp.Droid.Views.Menu
                 case Resource.Id.nav_home:
                     ViewModel.ShowHomeCommand.Execute();
                     break;
+                case Resource.Id.nav_weather:
+                    ViewModel.ShowWeatherCommand.Execute();
+                    break;
                 case Resource.Id.nav_settings:
                     ViewModel.ShowSettingsCommand.Execute();
                     break;

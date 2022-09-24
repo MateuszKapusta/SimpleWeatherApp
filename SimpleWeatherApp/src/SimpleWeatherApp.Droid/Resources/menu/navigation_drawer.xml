@@ -7,9 +7,13 @@
         <item
             android:id="@+id/nav_home"
             android:title="@string/app_home" />
+		<item
+	        android:id="@+id/nav_weather"
+	        android:title="@string/app_weather" />
         <item
             android:id="@+id/nav_settings"
             android:title="@string/app_settings" />
+
     </group>
 
 </menu>
