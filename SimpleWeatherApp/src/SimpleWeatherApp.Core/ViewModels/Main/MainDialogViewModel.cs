@@ -71,7 +71,7 @@ namespace SimpleWeatherApp.Core.ViewModels.Main
             }
             catch (Exception ex)
             {
-
+                //TODO: Add pop-up error message
             }
 
             await base.Initialize();

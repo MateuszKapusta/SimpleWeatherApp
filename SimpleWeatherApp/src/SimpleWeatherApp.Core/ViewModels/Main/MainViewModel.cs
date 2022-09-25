@@ -84,7 +84,7 @@ namespace SimpleWeatherApp.Core.ViewModels.Main
             }
             catch(Exception ex)
             {
-                //TODO: Add popup showing error message
+                //TODO: Add pop-up error message
             }
         }
         private async Task SelectCityAsync(CountryInfoDto city)
