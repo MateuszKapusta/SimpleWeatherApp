@@ -69,9 +69,11 @@
     <Compile Include="MainApplication.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\BaseActivity.cs" />
+    <Compile Include="Views\BaseDialogFragment.cs" />
     <Compile Include="Views\BaseFragment.cs" />
     <Compile Include="Views\Helpers\IDrawerActivity.cs" />
     <Compile Include="Views\Main\MainContainerActivity.cs" />
+    <Compile Include="Views\Main\MainDialogFragment.cs" />
     <Compile Include="Views\Main\MainFragment.cs" />
     <Compile Include="Views\Menu\MenuFragment.cs" />
     <Compile Include="Views\Settings\SettingsFragment.cs" />
@@ -199,6 +201,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\fragment_weather.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\fragment_main_dialog.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

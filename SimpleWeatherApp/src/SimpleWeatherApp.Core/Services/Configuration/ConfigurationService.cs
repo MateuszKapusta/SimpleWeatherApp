@@ -13,14 +13,16 @@ namespace SimpleWeatherApp.Core.Services.Configuration
         #region Setting Constants
 
         private const string KeyWeatherApiKey = "weather_api_key";
+        private const string KeyFavoritePlaceName = "favorite_place_Name";
         private const string KeyFavoritePlaceLat = "favorite_place_lat";
         private const string KeyFavoritePlaceLon = "favorite_place_lon";
         private const string KeyPreferredUnits = "preferred_units";
 
         private readonly string WeatherApiKeyDefault = "8341ee30993be9305f759305dc801801";
+        private readonly string FavoritePlaceNameDefault = string.Empty;
         private readonly double FavoritePlaceLatDefault = 0.0;
         private readonly double FavoritePlaceLonDefault = 0.0;
-        private readonly int PreferredUnitsDefautl = (int)TemperatureUnits.Fahrenheit;
+        private readonly int PreferredUnitsDefautl = (int)TemperatureUnits.standard;
 
         #endregion
 
@@ -29,6 +31,12 @@ namespace SimpleWeatherApp.Core.Services.Configuration
         {
             get => Preferences.Get(KeyWeatherApiKey, WeatherApiKeyDefault);
             set => Preferences.Set(KeyWeatherApiKey, value);
+        }
+
+        public string FavoritePlaceName
+        {
+            get => Preferences.Get(KeyFavoritePlaceName, FavoritePlaceNameDefault);
+            set => Preferences.Set(KeyFavoritePlaceName, value);
         }
 
         public double FavoritePlaceLat

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:local="http://schemas.android.com/apk/res/com.simpleweatherapp"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:padding="16dp">
+
+
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    app:MvxBind="Text WeatherInfo.Name" />
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:MvxBind="Text WeatherInfo.MainData.Temp" />
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:MvxBind="Text WeatherInfo.WeatherData[0].Description" />
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_medium">
+
+    <Button
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content" 
+      android:layout_alignParentLeft="true"
+      android:text="@string/main_dialog_back"
+      local:MvxBind="Click BackCommand" />
+    <Button
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"   
+      android:layout_centerInParent="true"
+      android:text="@string/main_dialog_save"
+      local:MvxBind="Click SaveCoordCommand" />
+    <Button
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"   
+      android:text="@string/main_dialog_details"
+      android:layout_alignParentRight="true"
+      local:MvxBind="Click DetailsCommand" />
+
+    </RelativeLayout>
+
+</LinearLayout>

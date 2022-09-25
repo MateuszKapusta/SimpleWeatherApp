@@ -1,8 +1,10 @@
 using MvvmCross;
 using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using SimpleWeatherApp.Core.Infrastructure;
 using SimpleWeatherApp.Core.Models.Menu.Dtos;
 using SimpleWeatherApp.Core.Models.Weather.Dtos;
+using SimpleWeatherApp.Core.Services.Configuration;
 using SimpleWeatherApp.Core.Services.Rest;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace SimpleWeatherApp.Core.ViewModels.Main
     public class MainViewModel : BaseViewModel
     {
         public IMvxAsyncCommand NewCityNameCommand { get; private set; }
+        public IMvxAsyncCommand<CountryInfoDto> SelectCityCommand { get; private set; }
 
         private string _cityName;
         public string CityName
@@ -39,12 +42,29 @@ namespace SimpleWeatherApp.Core.ViewModels.Main
         }
 
         private readonly IRestService restService;
+        private readonly IMvxNavigationService navigationService;
+        private readonly IConfigurationService configurationService;
 
-        public MainViewModel(IRestService restService)
+        public MainViewModel(IRestService restService
+            , IMvxNavigationService navigationService
+            , IConfigurationService configurationService)
         {
             this.restService = restService;
+            this.navigationService = navigationService;
+            this.configurationService = configurationService;
 
             NewCityNameCommand = new MvxAsyncCommand(NewCityNameAsync);
+            SelectCityCommand = new MvxAsyncCommand<CountryInfoDto>(SelectCityAsync);
+        }
+
+        public override Task Initialize()
+        {
+            if(!string.IsNullOrEmpty(configurationService.FavoritePlaceName))
+            {
+                _cityName = configurationService.FavoritePlaceName;
+            }
+
+            return base.Initialize();
         }
 
 
@@ -66,6 +86,10 @@ namespace SimpleWeatherApp.Core.ViewModels.Main
             {
                 //TODO: Add popup showing error message
             }
+        }
+        private async Task SelectCityAsync(CountryInfoDto city)
+        {
+            await navigationService.Navigate<MainDialogViewModel, CoordDto>(new CoordDto() {Latitude = city.Lat, Longitude = city.Lon });
         }
 
     }

@@ -9,6 +9,7 @@ namespace SimpleWeatherApp.Core.Services.Configuration
     public interface IConfigurationService
     {
         string WeatherApiKey { get; set; }
+        string FavoritePlaceName { get; set; }
         double FavoritePlaceLat { get; set; }
         double FavoritePlaceLon { get; set; }
         TemperatureUnits PreferredUnits { get; set; }

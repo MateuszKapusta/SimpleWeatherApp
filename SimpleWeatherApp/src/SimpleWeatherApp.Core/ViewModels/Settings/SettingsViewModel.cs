@@ -1,6 +1,7 @@
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using SimpleWeatherApp.Core.Models.Settings.Enums;
+using SimpleWeatherApp.Core.Services.Configuration;
 using SimpleWeatherApp.Core.ViewModels.Main;
 using SimpleWeatherApp.Core.ViewModels.Menu;
 using SimpleWeatherApp.Core.ViewModels.Settings;
@@ -15,7 +16,19 @@ namespace SimpleWeatherApp.Core.ViewModels.Settings
 {
     public class SettingsViewModel : BaseViewModel
     {
-        public IMvxAsyncCommand<TemperatureUnits> SelectUnitCommand { get; private set; }
+        public IMvxCommand<TemperatureUnits> SelectUnitCommand { get; private set; }
+
+        private TemperatureUnits _selectUnits;
+
+        public TemperatureUnits SelectUnits
+        {
+            get { return _selectUnits; }
+            set
+            {
+                _selectUnits = value;
+                RaisePropertyChanged(() => SelectUnits);
+            }
+        }
 
         private List<TemperatureUnits> _units;
 
@@ -29,21 +42,29 @@ namespace SimpleWeatherApp.Core.ViewModels.Settings
             }
         }
 
-        public SettingsViewModel()
+        private readonly IConfigurationService configurationService;
+
+        public SettingsViewModel(IConfigurationService configurationService)
         {
-            SelectUnitCommand = new MvxAsyncCommand<TemperatureUnits>(SelectUnitAsync);
+            this.configurationService = configurationService;
+
+            SelectUnitCommand = new MvxCommand<TemperatureUnits>(SelectUnit);
+            SelectUnits = configurationService.PreferredUnits;
 
             Units = new List<TemperatureUnits> {
-                TemperatureUnits.Fahrenheit,
-                TemperatureUnits.Celsius,
-                TemperatureUnits.Kelvin};
+                TemperatureUnits.metric,
+                TemperatureUnits.standard,
+                TemperatureUnits.imperial};
         }
 
 
 
-        private Task SelectUnitAsync(TemperatureUnits unit)
+        private void SelectUnit(TemperatureUnits unit)
         {
-            return Task.CompletedTask;
+            if (unit != configurationService.PreferredUnits) 
+            {
+                configurationService.PreferredUnits = unit;
+            }
         }
 
     }
