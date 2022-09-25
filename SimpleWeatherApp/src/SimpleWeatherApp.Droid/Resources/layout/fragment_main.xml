@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText1"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            local:MvxBind="Text CityName; Click NewCityNameCommand"/>
         <Mvx.MvxListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

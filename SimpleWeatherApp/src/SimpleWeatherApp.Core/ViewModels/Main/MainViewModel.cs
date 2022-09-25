@@ -1,4 +1,9 @@
+using MvvmCross;
+using MvvmCross.Commands;
+using SimpleWeatherApp.Core.Infrastructure;
 using SimpleWeatherApp.Core.Models.Menu.Dtos;
+using SimpleWeatherApp.Core.Models.Weather.Dtos;
+using SimpleWeatherApp.Core.Services.Rest;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +14,19 @@ namespace SimpleWeatherApp.Core.ViewModels.Main
 {
     public class MainViewModel : BaseViewModel
     {
+        public IMvxAsyncCommand NewCityNameCommand { get; private set; }
+
+        private string _cityName;
+        public string CityName
+        {
+            get { return _cityName; }
+            set
+            {
+                _cityName = value;
+                RaisePropertyChanged(() => CityName);
+            }
+        }
+
         private ObservableCollection<CountryInfoDto> _countryInfo;
         public ObservableCollection<CountryInfoDto> CountryInfo
         {
@@ -20,22 +38,37 @@ namespace SimpleWeatherApp.Core.ViewModels.Main
             }
         }
 
-        public override void Prepare()
-        {
-            base.Prepare();
+        private readonly IRestService restService;
 
-            MockCountryInfo();
+        public MainViewModel(IRestService restService)
+        {
+            this.restService = restService;
+
+            NewCityNameCommand = new MvxAsyncCommand(NewCityNameAsync);
         }
 
-        private void MockCountryInfo()
+
+
+        private async Task NewCityNameAsync()
         {
-            CountryInfo = new ObservableCollection<CountryInfoDto>()
+            var parameters = new Dictionary<string, string>()
             {
-                new CountryInfoDto(){Name ="Test", Country="US", Lat = 42.9834, Lot = -0.1257 },
-                new CountryInfoDto(){Name = "Home",Country="PL", Lat = 42.9834, Lot = 34 },
-                new CountryInfoDto(){Name = "Mosk", Country = "RUS", Lat = 45, Lot = -81.233}
+                { "q", CityName },
+                { "limit", "0" }
             };
+
+            try
+            {
+                var cityData = await restService.GetAsync<List<CountryInfoDto>>(Endpoints.DirectionData, parameters);
+                CountryInfo = new ObservableCollection<CountryInfoDto>(cityData);
+            }
+            catch(Exception ex)
+            {
+                //TODO: Add popup showing error message
+            }
         }
 
     }
 }
+
+

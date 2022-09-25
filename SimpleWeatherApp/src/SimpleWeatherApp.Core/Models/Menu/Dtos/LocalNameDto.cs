@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace SimpleWeatherApp.Core.Models.Menu.Dtos
 {
@@ -18,6 +20,7 @@ namespace SimpleWeatherApp.Core.Models.Menu.Dtos
         public string En { get; set; }
         public string Eu { get; set; }
         public string Fa { get; set; }
+        [JsonProperty("feature_name")]
         public string FeatureName { get; set; }
         public string Fi{ get; set; }
         public string Fr { get; set; }
